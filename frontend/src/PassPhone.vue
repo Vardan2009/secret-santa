@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import {
+    ref
+} from 'vue';
 
 const props = defineProps(["participantList"]);
 const emit = defineEmits(["done"])
@@ -38,7 +40,7 @@ const revealParticipant = () => {
 const nextParticipant = () => {
     currentParticipantIdx.value++;
 
-    if(currentParticipantIdx.value >= participantList.length) {
+    if (currentParticipantIdx.value >= participantList.length) {
         currentParticipantIdx.value--;
         emit("done");
         return;
@@ -46,12 +48,12 @@ const nextParticipant = () => {
 
     currentRevealed.value = false;
 }
-
 </script>
 
 <template>
+<div id="pass-phone-page">
     <h1>Pass the phone to...</h1>
-    <p>{{  participantList[currentParticipantIdx].name }}</p>
+    <p>{{ participantList[currentParticipantIdx].name }}</p>
 
     <template v-if="currentRevealed">
         <p>You are giving a gift to {{ participantTargetMap[participantList[currentParticipantIdx]].name }}</p>
@@ -67,6 +69,14 @@ const nextParticipant = () => {
     <button v-else @click="revealParticipant">
         Reveal
     </button>
-
-
+</div>
 </template>
+
+<style scoped>
+
+#pass-phone-page {
+    text-align: center;
+    padding: 30px;
+}
+
+</style>

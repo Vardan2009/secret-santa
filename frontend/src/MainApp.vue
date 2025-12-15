@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import {
+    ref
+} from 'vue'
 
 import ParticipantForm from './ParticipantForm.vue';
 import PassPhone from './PassPhone.vue';
@@ -9,7 +11,10 @@ const gameStarted = ref(false);
 
 const addParticipant = (name, text) => {
     if (name === '') return;
-    participants.value.push({name, text});
+    participants.value.push({
+        name,
+        text
+    });
 };
 
 const startGame = () => {
@@ -23,10 +28,9 @@ const startGame = () => {
 const matchingDone = () => {
     alert("done!")
 }
-
 </script>
 
 <template>
-    <ParticipantForm v-if="!gameStarted" @addParticipant="addParticipant" @startGame="startGame" />
-    <PassPhone @done="matchingDone" v-else :participantList="participants" />
+<ParticipantForm :participants="participants" v-if="!gameStarted" @addParticipant="addParticipant" @startGame="startGame" />
+<PassPhone @done="matchingDone" v-else :participantList="participants" />
 </template>
