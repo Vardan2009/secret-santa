@@ -43,7 +43,7 @@ const nextParticipant = () => {
         emit("done");
         return;
     }
-    
+
     currentRevealed.value = false;
 }
 

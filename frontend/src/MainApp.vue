@@ -18,7 +18,6 @@ const startGame = () => {
         return;
     }
     gameStarted.value = true;
-    alert('Secret Santa started!');
 };
 
 const matchingDone = () => {
