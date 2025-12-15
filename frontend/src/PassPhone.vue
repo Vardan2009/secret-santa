@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 
 const props = defineProps(["participantList"]);
+const emit = defineEmits(["done"])
 
 if (!props.participantList || props.participantList.length === 0) {
     throw new Error("participantList prop is required and cannot be empty");
@@ -31,20 +32,38 @@ const currentParticipantIdx = ref(0);
 const currentRevealed = ref(false);
 
 const revealParticipant = () => {
-    alert(`${participantList[currentParticipantIdx.value]}, you are giving a gift to ${participantTargetMap[participantList[currentParticipantIdx.value]]}!`);
-    currentParticipantIdx.value++;
-    if (currentParticipantIdx.value >= participantList.length) {
-        alert("All participants have revealed their targets! Happy gifting!");
-        currentParticipantIdx.value = 0; 
-    }
+    currentRevealed.value = true;
 };
+
+const nextParticipant = () => {
+    currentParticipantIdx.value++;
+
+    if(currentParticipantIdx.value >= participantList.length) {
+        currentParticipantIdx.value--;
+        emit("done");
+        return;
+    }
+    
+    currentRevealed.value = false;
+}
+
 </script>
 
 <template>
     <h1>Pass the phone to...</h1>
-    <p>{{  participantList[currentParticipantIdx] }}</p>
+    <p>{{  participantList[currentParticipantIdx].name }}</p>
 
-    <p v-if="currentRevealed">You are giving a gift to {{ participantTargetMap[participantList[currentParticipantIdx]] }}!</p>
+    <template v-if="currentRevealed">
+        <p>You are giving a gift to {{ participantTargetMap[participantList[currentParticipantIdx]].name }}</p>
+        <p>{{ participantTargetMap[participantList[currentParticipantIdx]].name }}'s preferences</p>
+        <p>
+            {{ participantTargetMap[participantList[currentParticipantIdx]].text  }}
+        </p>
+
+        <button @click="nextParticipant">
+            Next participant
+        </button>
+    </template>
     <button v-else @click="revealParticipant">
         Reveal
     </button>
