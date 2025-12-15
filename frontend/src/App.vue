@@ -35,6 +35,8 @@ body {
     font-style: normal;
 
     font-size: larger;
+
+    overflow: hidden;
 }
 
 input,
@@ -90,4 +92,20 @@ button.primary {
     background-color: var(--accent2-darker);
     color: var(--accent2);
 }
+
+.slide-enter-active,
+.slide-leave-active {
+    transition: all 0.3s ease;
+}
+
+.slide-enter-from {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.slide-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
 </style>
