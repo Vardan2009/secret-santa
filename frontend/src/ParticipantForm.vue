@@ -48,8 +48,12 @@ const startGame = () => {
 
         <br />
         <button @click="addParticipant">Next participant</button>
-        <br />or<br />
-        <button class="primary" @click="startGame">Start Secret Santa</button>
+
+        <template v-if="props.participants.length >= 3">
+            <br />or<br />
+            <button class="primary" @click="startGame">Start Secret Santa</button>
+        </template>
+
     </div>
 </transition>
 </template>

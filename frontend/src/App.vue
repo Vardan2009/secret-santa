@@ -33,6 +33,7 @@ const startGame = () => {
 };
 
 const matchingDone = () => {
+  alert("done!")
 }
 </script>
 
@@ -134,7 +135,7 @@ button.primary {
 
 .slide-enter-active,
 .slide-leave-active {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .slide-enter-from {
@@ -147,4 +148,9 @@ button.primary {
     transform: translateX(-100%);
 }
 
+.slide-enter-to,
+.slide-leave-from {
+    opacity: 1;
+    transform: translateX(0);
+}
 </style>

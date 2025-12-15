@@ -65,7 +65,7 @@ const nextParticipant = () => {
 
 <template>
 <transition name="slide">
-    <div id="pass-phone-page" :key="currentRevealed">
+    <div id="pass-phone-page" :key="currentParticipantIdx">
         <p>Pass the phone to...</p>
         <h1>{{ participantList[currentParticipantIdx].name }}</h1>
         <hr>
@@ -81,8 +81,11 @@ const nextParticipant = () => {
             </p>
 
             <br /><br />
-            <button @click="nextParticipant">
-                Next participant
+            <button @click="nextParticipant" :class="{ 'primary':currentParticipantIdx >= participantList.length - 1 }">
+                <span v-if="currentParticipantIdx < participantList.length - 1">
+                    Next participant
+                </span>
+                <span v-else>Finish</span>
             </button>
         </template>
         <button v-else @click="revealParticipant">
